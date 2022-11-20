@@ -1,15 +1,22 @@
 package com.example.android;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MyVocabularyActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -22,10 +29,12 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
     Button searchButton;
     ImageButton addButton;
 
+    ConstraintLayout container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myvocabulary);
+        setContentView(R.layout.my_vocabulary_activity);
 
         // 객체 연결
         searchWindow = findViewById(R.id.searchWindow);
@@ -33,19 +42,22 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
 
+        addButton.setOnClickListener(this);
+        searchButton = findViewById(R.id.searchButton);
+        container = (ConstraintLayout) findViewById(R.id.container);
     }
 
     // 버튼 클릭 이벤트 구현
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.searchButton:
                 String searchWindowString = getSearchWindowString();
-                //
                 break;
             case R.id.addButton:
-                //
-                break;
+                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                inflater.inflate(R.layout.add_vocabulary_acivity, container, true);
+                Log.d("hello","hello");
         }
 
     }
@@ -69,7 +81,6 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
 
     public String getSearchWindowString(){
         String str = searchWindow.getText().toString();
-
         if(str.length() == 0)
         {
             return null;

@@ -1,9 +1,7 @@
 package com.example.android;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +22,7 @@ public class SharedVocabularyActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shared_vocabulary);
+        setContentView(R.layout.shared_vocabulary_activity);
 
         // 객체 연결
         searchWindow = findViewById(R.id.searchWindow);

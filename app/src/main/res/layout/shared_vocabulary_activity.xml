@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SharedVocabularyActivity">
+    <TextView
+        android:id="@+id/activityLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="51dp"
+        android:fontFamily="@font/activity_name_font"
+        android:text="공유 단어장"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="34dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchWindow2"
+        android:layout_width="360dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/search_window_radius"
+        android:fontFamily="@font/search_window_font"
+        android:includeFontPadding="true"
+        android:inputType="text"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityLabel2"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/searchButton2"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/image_2"
+        app:layout_constraintStart_toStartOf="@id/searchWindow2"
+        app:layout_constraintTop_toBottomOf="@id/activityLabel2" />
+
+    <Button
+        android:id="@+id/searchOptionButton2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="151dp"
+        android:background="@drawable/image_4"
+        app:layout_constraintStart_toEndOf="@+id/searchWindow2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/pageIndicator12"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginBottom="14dp"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ellipse_6" />
+
+    <ImageView
+        android:id="@+id/pageIndicator2_2"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginBottom="11dp"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ellipse_7" />
+
+    <ImageView
+        android:id="@+id/pageIndicator22"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="14dp"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addButtonBackground"
+        app:srcCompat="@drawable/ellipse_6" />
+
+    <ImageView
+        android:id="@+id/addButtonBackground"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ellipse" />
+
+    <ImageButton
+        android:id="@+id/addButton2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/image_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
