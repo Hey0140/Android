@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="400dp"
     android:layout_height="260dp"
-    android:background = "@drawable/add_vocabulary_layout_radius">
+    android:background = "@drawable/add_vocabulary_layout_radius"
+    tools:context=".MyVocabularyActivity">
 
     <EditText
         android:id="@+id/vocabularyNameForAdd"
@@ -22,11 +23,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Button
         android:id="@+id/wordForAdd"
         android:hint="단어 언어"
         android:textSize = "14dp"
-        android:inputType="text"
         android:singleLine="true"
         android:textColorHint="#d9d9d9"
         android:layout_width="360dp"
@@ -38,11 +38,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vocabularyNameForAdd" />
 
-    <EditText
+    <Button
         android:id="@+id/wordMeanForAdd"
         android:hint="의미 언어"
         android:textSize = "14dp"
-        android:inputType="text"
         android:singleLine="true"
         android:textColorHint="#d9d9d9"
         android:layout_width="360dp"

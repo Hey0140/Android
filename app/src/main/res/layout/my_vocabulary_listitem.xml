@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="9dp"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
-    <TextView
+    <View
         android:id="@+id/myVocabularyListItem"
         android:layout_width="400dp"
         android:layout_height="75dp"
@@ -29,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/myVocabularyListItem" />
 
     <TextView
-        android:id="@+id/vocabularyBirthDay"
+        android:id="@+id/myVocabularyBirthDay"
         android:layout_width="60dp"
         android:layout_height="9dp"
         android:layout_marginTop="17dp"
