@@ -49,30 +49,30 @@ public class SharedVocabularyActivity extends AppCompatActivity implements View.
         addViewWindow = findViewById(R.id.addViewWindow2);
         acceptButton = findViewById(R.id.acceptButton2);
         addViewWindow.setVisibility(View.GONE);
-
-        addButton.setOnClickListener(this);
-        acceptButton.setOnClickListener(this);
         acceptfirst = findViewById(R.id.vocabularyNameForAdd2);
         acceptsecond = findViewById(R.id.wordForAdd2);
         acceptthird = findViewById(R.id.wordMeanForAdd2);
         myVocaContainer = findViewById(R.id.vocabularyListItemContainer2);
+
+        // 객체 이벤트 리스너 등
+        addButton.setOnClickListener(this);
+        acceptButton.setOnClickListener(this);
     }
 
     // 버튼 클릭 이벤트 구현
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.searchButton2:
+            case R.id.searchButton2: // 검색 버튼 (미완료)
                 String searchWindowString = getSearchWindowString();
                 //
                 break;
-            case R.id.addButton2:
+            case R.id.addButton2: // 단어장 추가 버튼 클릭시
                 addViewWindow.setVisibility(View.VISIBLE);
                 break;
-            case R.id.acceptButton2:
+            case R.id.acceptButton2: // 단어장 [생성하기] 버튼 클릭시
                 LayoutInflater inflater2 = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 inflater2.inflate(R.layout.my_vocabulary_listitem, myVocaContainer, true);
-                Log.d("@@@@@@@@@@@@@@","@@@@@@@@@@@@@@@@@@@@@@@@@");
                 break;
         }
 
@@ -89,6 +89,7 @@ public class SharedVocabularyActivity extends AppCompatActivity implements View.
                 x2 = touchEvent.getX();
                 y2 = touchEvent.getY();
                 if(x2 + 500> x1){
+                    addViewWindow.setVisibility(View.GONE);
                     finish();
                 }
         }

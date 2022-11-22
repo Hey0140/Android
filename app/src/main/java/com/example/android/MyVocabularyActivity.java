@@ -22,12 +22,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MyVocabularyActivity extends AppCompatActivity implements View.OnClickListener{
 
     // 화면 스와이프를 위한 좌표
     float x1,x2,y1,y2;
-    public static ArrayList<MyVocabularyItem> myVocaArrayList = new ArrayList<>();
+    public static LinkedList<MyVocabularyItem> myVocaArrayList = new LinkedList<>();
 
     // 객체 연결
     EditText searchWindow;
@@ -55,18 +56,19 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         searchOptionButton = findViewById(R.id.searchOptionButton);
         searchButton = findViewById(R.id.searchButton);
         addButton = findViewById(R.id.addButton);
-        addButton.setOnClickListener(this);
         searchButton = findViewById(R.id.searchButton);
         addViewWindow = findViewById(R.id.addViewWindow);
         acceptButton = findViewById(R.id.acceptButton);
-        acceptButton.setOnClickListener(this);
         addViewWindow.setVisibility(View.GONE);
         acceptfirst = findViewById(R.id.vocabularyNameForAdd);
         acceptsecond = findViewById(R.id.wordForAdd);
         acceptthird = findViewById(R.id.wordMeanForAdd);
         myVocaContainer = findViewById(R.id.vocabularyListItemContainer);
 
-        // 튜토리얼
+        // 객체 이벤트 리스너 등록
+        addButton.setOnClickListener(this);
+        acceptButton.setOnClickListener(this);
+
 
     }
 
@@ -74,15 +76,15 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.searchButton:
+            case R.id.searchButton: // 검색 버튼 클릭시 (미완성)
                 String searchWindowString = getSearchWindowString();
                 break;
-            case R.id.addButton:
+            case R.id.addButton: // 단어장 추가 버튼 클릭시
                 addViewWindow.setVisibility(View.VISIBLE);
                 break;
-            case R.id.acceptButton:
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                inflater.inflate(R.layout.my_vocabulary_listitem, myVocaContainer, true);
+            case R.id.acceptButton: // 단어장 [생성하기] 버튼 클릭시
+                initMyVocabulary(getVocabularyNameForAdd(),"gdgd","gdgd");
+                addViewWindow.setVisibility(View.GONE);
                 break;
         }
     }
@@ -100,6 +102,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 if(x1 + 500> x2){
                     Intent i = new Intent(MyVocabularyActivity.this, SharedVocabularyActivity.class);
                     startActivity(i);
+                    addViewWindow.setVisibility(View.GONE);
                 }
         }
         return false;
@@ -114,5 +117,29 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         }else{
             return str;
         }
+    }
+
+    public void initMyVocabulary(String vocabulacryName, String word, String wordMean)
+    {
+        myVocaArrayList.addLast(new MyVocabularyItem(vocabulacryName,word,wordMean));
+        int idEdit = myVocaArrayList.size() * 4;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.my_vocabulary_listitem, myVocaContainer, true);
+        View v = myVocaContainer.findViewById(R.id.myVocabularyListItem);
+        TextView one = myVocaContainer.findViewById(R.id.myVocabularyListItemName);
+        one.setId(idEdit * 1);
+        Log.d("@@@@@@@@@@@@@@@@@@@@@",Integer.toString(one.getId()));
+        one.setText(vocabulacryName);
+    }
+
+    public void initAllMyVocabulary()
+    {
+        
+    }
+
+    public String getVocabularyNameForAdd()
+    {
+        String str = acceptfirst.getText().toString();
+        return str;
     }
 }

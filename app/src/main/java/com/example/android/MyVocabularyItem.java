@@ -9,8 +9,9 @@ public class MyVocabularyItem {
     public String vocabularyBirthDay;
     public int vocabularyCount;
     public String languageRelation;
+    int id;
 
-    public MyVocabularyItem(String name, String languageRelation){
+    public MyVocabularyItem(String name, String word, String wordMean){
         // 단어장 이름 초기화
         vocabularyBirthDay = name;
         // 단어장 생성 날짜 초기화

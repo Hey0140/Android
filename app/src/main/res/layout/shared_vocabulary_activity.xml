@@ -87,11 +87,11 @@
         android:layout_marginBottom="14dp"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addButtonBackground"
+        app:layout_constraintEnd_toStartOf="@+id/addButtonBackground2"
         app:srcCompat="@drawable/ellipse_6" />
 
     <ImageView
-        android:id="@+id/addButtonBackground"
+        android:id="@+id/addButtonBackground2"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginEnd="14dp"
