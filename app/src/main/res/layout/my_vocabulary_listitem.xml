@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/myVocabularyListItemName"
-        android:layout_width="120dp"
+        android:layout_width="250dp"
         android:layout_height="17dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/languageRelation"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="12dp"
         android:layout_marginStart="21dp"
         android:layout_marginBottom="17dp"
@@ -74,7 +74,7 @@
         android:id="@+id/view"
         android:layout_width="400dp"
         android:layout_height="84dp"
-        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="184dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
