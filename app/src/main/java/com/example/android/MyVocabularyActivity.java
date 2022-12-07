@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,7 +24,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
 
     // 화면 스와이프를 위한 좌표
     float x1, x2, y1, y2;
-    public static LinkedList<MyVocabularyItem> myVocaArrayList = new LinkedList<>();
+    public static LinkedList<WordBook> myVocaArrayList = new LinkedList<>();
 
     // 객체 연결
     EditText searchWindow;
@@ -153,6 +151,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.addButton: // 단어장 추가 버튼 클릭시
                 addViewWindow.setVisibility(View.VISIBLE);
+                isForRewrite = false;
                 break;
             case R.id.acceptButton: // 단어장 [생성하기] 버튼 클릭시
                 initMyVocabulary(getVocabularyNameForAdd(), wordForAdd.getText().toString(), wordMeanForAdd.getText().toString());
@@ -200,6 +199,9 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
             case R.id.acceptButtonForRewrite:
                 rewriteVocabulary(idForRewrite);
                 isForRewrite = false;
+                wordMeanForRewrite.setText("");
+                wordForRewrite.setText("");
+                vocaNameForRewrite.setText("");
                 break;
             case R.id.wordMeanForRewrite:
                 languagePickerWindow.setVisibility(View.VISIBLE);
@@ -210,7 +212,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
             case R.id.acceptButtonForDelete:
                 deleteViewWindow.setVisibility(View.VISIBLE);
                 rewriteViewWindow.setVisibility(View.GONE);
-                deleteConfirmText.setText("정말로 단어장 [" + getVocaNameStringForDeleteConfirm() + "]을/를 삭제하시겠습니까?");
+                deleteConfirmText.setText("정말로 단어장 [" + getWordBookNameStringForDeleteWindow() + "]을/를 삭제하시겠습니까?");
                 Log.d("삭제하기","zmfflr");
                 break;
             case R.id.deleteButton:
@@ -253,7 +255,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
 
     // 단어장 목록 아이템 inflate 및 생성된 단어장의 롱클릭 리스너 구현
     public void initMyVocabulary(String vocabularyName, String word, String wordMean) {
-        myVocaArrayList.addLast(new MyVocabularyItem(vocabularyName, word, wordMean));
+        myVocaArrayList.addLast(new WordBook(vocabularyName, word, wordMean));
         int idEdit = myVocaArrayList.size() * 5;
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.my_vocabulary_listitem, myVocaContainer, true);
@@ -269,6 +271,14 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 return true;
             }
         });
+        myVocaArrayList.getLast().v1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyVocabularyActivity.this,WordBookActivity.class);
+                intent.putExtra("단어장 data",getWordBookNameString(v.getId())+"@"+Integer.toString(v.getId()));
+                startActivity(intent);
+            }
+        });
         TextView one = myVocaContainer.findViewById(R.id.myVocabularyListItemName);
         one.setId(idEdit + 1);
         one.setText(vocabularyName);
@@ -277,7 +287,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         two.setText(word + "/" + wordMean);
         TextView three = myVocaContainer.findViewById(R.id.myVocabularyBirthDay);
         three.setId(idEdit + 3);
-        three.setText(myVocaArrayList.getLast().vocabularyBirthDay);
+        three.setText(myVocaArrayList.getLast().getCreateDateToString());
         TextView five = myVocaContainer.findViewById(R.id.wordCount);
         five.setId(idEdit + 4);
         five.setText("0");
@@ -312,12 +322,19 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
     }
 
     // 삭제 확인 창에서 단어장 목록 이름을 가져오는 메소드
-    public String getVocaNameStringForDeleteConfirm(){
+    public String getWordBookNameStringForDeleteWindow(){
 
         TextView temp = findViewById(idForRewrite + 1);
         String str = temp.getText().toString();
         return str;
 
+    }
+
+    public String getWordBookNameString(int id)
+    {
+        TextView temp = findViewById(id+1);
+        String str = temp.getText().toString();
+        return str;
     }
 
 
@@ -349,10 +366,12 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
             return;
         }
     }
+
+
     public void rewriteVocabulary(int reId)
     {
         int idx = (reId / 5) - 1;
-        myVocaArrayList.get(idx).vocabularyName = vocaNameForRewrite.toString();
+        myVocaArrayList.get(idx).name = vocaNameForRewrite.toString();
         myVocaArrayList.get(idx).languageRelation = wordForRewrite.toString() + "/" + wordMeanForRewrite.toString();
         TextView v1 = myVocaContainer.findViewById(reId+1);
         TextView v2 = myVocaContainer.findViewById(reId+2);

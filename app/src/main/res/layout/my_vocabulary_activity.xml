@@ -43,7 +43,7 @@
         android:id="@+id/searchButton"
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/image_2"
         app:layout_constraintStart_toStartOf="@id/searchWindow"

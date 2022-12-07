@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/myVocabularyListItemName"
         android:layout_width="250dp"
-        android:layout_height="17dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
         android:layout_marginBottom="41dp"
