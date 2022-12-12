@@ -7,6 +7,14 @@
     android:id="@+id/my_vocabulary_activity_xml"
     tools:context=".MyVocabularyActivity">
 
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id = "@+id/backgroundView"
+        android:background="#00FFFFFF"
+        />
+
     <TextView
         android:id="@+id/activityLabel"
         android:layout_width="wrap_content"
@@ -116,8 +124,8 @@
         android:id="@+id/addViewWindow"
         android:layout_width="400dp"
         android:layout_height="260dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:background = "@drawable/add_vocabulary_layout_radius"
@@ -193,7 +201,7 @@
         android:layout_width="400dp"
         android:layout_height="310dp"
         android:background="@drawable/add_vocabulary_layout_radius"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="4dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -277,9 +285,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="402dp"
-        android:layout_height="338dp"
+        android:id="@+id/listScrollView"
+        android:layout_width="403dp"
+        android:layout_height="505dp"
         android:layout_marginStart="9dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="9dp"
