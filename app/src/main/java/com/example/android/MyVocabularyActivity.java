@@ -3,7 +3,6 @@ package com.example.android;
 import static android.util.Log.d;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -211,8 +210,6 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                         }
                     });
                     vocaId = _vocaid;
-                    Log.i("롱클릭 시 id", Integer.toString(vocaId));
-                    Log.i("!!!!!!!",vocabularyName);
                     isForRewrite = true;
                     return true;
                 }
@@ -226,7 +223,6 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                     vocaId = _vocaid;
                     intent.putExtra("단어장 data",getWordBookNameString(v.getId())+"@"+Integer.toString(v.getId()));
                     intent.putExtra("현재 클릭된 단어장 id", vocaId);
-                    Log.d("intent 클릭", "vocaId 전송");
                     startActivity(intent);
                     //어떤 걸로 액티비티끼리 다시 정보를 받을 수 있는 거지
                 }
@@ -256,8 +252,10 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
             case R.id.searchButton: // 검색 버튼 클릭시 (미완성)
                 String searchWindowString = getSearchWindowString();
                 clearVocaView();
+                Log.d("검색 버튼 클릭 이벤트"," ");
                 break;
             case R.id.addButton: // 단어장 추가 버튼 클릭시
+                Log.d("단어장 추가 버튼 이벤트"," ");
                 vocaNameForAdd.setText("");
                 wordForAdd.setText("");
                 wordMeanForAdd.setText("");
@@ -284,6 +282,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                     backgroundView.setBackgroundColor(Color.parseColor("#00000000"));
                 }
                 else{
+                    Log.d("단어장 생성 이벤트, 단어장 이름 : ",vocaName);
                     addViewWindow.setVisibility(View.GONE);
                     java.util.Date date = new java.util.Date(System.currentTimeMillis());
                     vocabularyDB.addVoca(vocaName, wordLang, meanLang, date);
@@ -312,33 +311,43 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 languagePickerWindow.setVisibility(View.VISIBLE);
                 break;
             case R.id.koreanPick:
+                Log.i("한국어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"한국어");
                 break;
             case R.id.chinesePick:
+                Log.i("중국어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"중국어");
                 break;
             case R.id.englisgPick:
+                Log.i("영어 선택","");
                 setLanguageBlank(isSecond, isForRewrite, "영어");
                 break;
             case R.id.frenchPick:
+                Log.i("프랑스어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"프랑스어");
                 break;
             case R.id.germanPick:
+                Log.i("독일어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"독일어");
                 break;
             case R.id.portugalPick:
+                Log.i("포르투갈어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"포르투갈어");
                 break;
             case R.id.spanshPick:
+                Log.i("스페인어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"스페인어");
                 break;
             case R.id.greekPick:
+                Log.i("그리스어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"그리스어");
                 break;
             case R.id.japanesePick:
+                Log.i("일본어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"일본어");
                 break;
             case R.id.russianPick:
+                Log.i("러시아어 선택","");
                 setLanguageBlank(isSecond, isForRewrite,"러시아어");
                 break;
             case R.id.acceptButtonForRewrite:
@@ -364,21 +373,24 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 vocaNameForRewrite.setText("");
                 break;
             case R.id.wordMeanForRewrite:
+                Log.i("단어 수정","");
                 languagePickerWindow.bringToFront();
                 languagePickerWindow.setVisibility(View.VISIBLE);
                 break;
             case R.id.wordForRewrite:
+                Log.i("의미 수정","");
                 languagePickerWindow.bringToFront();
                 languagePickerWindow.setVisibility(View.VISIBLE);
                 break;
             case R.id.acceptButtonForDelete:
+                Log.i("삭제하기 버튼 클릭","");
                 deleteViewWindow.bringToFront();
                 deleteViewWindow.setVisibility(View.VISIBLE);
                 rewriteViewWindow.setVisibility(View.GONE);
                 deleteConfirmText.setText("정말로 단어장 [" + vocabularyDB.showName(vocaId) + "]을/를 삭제하시겠습니까?");
-                Log.d("삭제하기","삭제하기 버튼 클릭");
                 break;
             case R.id.deleteButton:
+                Log.i("삭제하기 버튼 클릭 및 최종 확인","");
                 backgroundView.setBackgroundColor(Color.parseColor("#00000000"));
                 deleteVoca(idForRewrite, vocaId);
                 deleteViewWindow.setVisibility(View.GONE);
@@ -400,6 +412,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 y2 = touchEvent.getY();
                 if (x1 + 500 > x2) {
                     Intent i = new Intent(MyVocabularyActivity.this, SharedVocabularyActivity.class);
+                    Log.i("액티비티 전환", "공유 단어장 액티비티로");
                     startActivity(i);
                     addViewWindow.setVisibility(View.GONE);
                 }
@@ -421,6 +434,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
     public void initMyVocabulary(String vocabularyName, String word, String wordMean) {
         int _id =vocabularyDB.showId(vocabularyName, word, wordMean);
         myVocaArrayList.addLast(new WordBook(vocabularyName, word, wordMean, _id));
+        Log.i("단어장 생성, 단어장 이름 : ",vocabularyName);
         int idEdit = myVocaArrayList.size() * 5;
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.my_vocabulary_listitem, myVocaContainer, true);
@@ -430,6 +444,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
             @Override
             public boolean onLongClick(View v) {
                 Log.d("롱클릭", Integer.toString(v.getId()));
+                Log.i("단어장 생성 및 롱클릭 리스너 연결","");
                 rewriteViewWindow.setVisibility(View.VISIBLE);
                 rewriteViewWindow.bringToFront();
                 backgroundView.setBackgroundColor(Color.parseColor("#85323232"));
@@ -458,6 +473,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                 intent.putExtra("단어장 data",getWordBookNameString(v.getId())+"@"+Integer.toString(v.getId()));
                 intent.putExtra("현재 클릭된 단어장 id", vocaId);
                 Log.d("intent 클릭", "vocaId 전송");
+                Log.i("단어장 클릭","");
                 startActivity(intent);
             }
         });
@@ -483,6 +499,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         myVocaArrayList.remove(idx);
         View delView = (View)findViewById(id);
         myVocaContainer.removeView((View)delView.getParent());
+        Log.i("단어장 삭제","");
         for(int i = id+5;i<=myVocaArrayList.size() * 5+5;i+=5)
         {
             View v = myVocaContainer.findViewById(i);
@@ -528,8 +545,10 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         if (isR) {
             if (isS){
                 wordForRewrite.setText(str);
+                Log.i("수정할 단어의 이름 수정 : ",wordForRewrite.getText().toString());
             }else{
                 wordMeanForRewrite.setText(str);
+                Log.i("수정할 단어의 의미 : ",wordMeanForRewrite.getText().toString());
             }
             isSecond = !isSecond;
             languagePickerWindow.setVisibility(View.INVISIBLE);
@@ -538,8 +557,10 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         } else {
             if (isS){
                 wordForAdd.setText(str);
+                Log.i("추가할 단어의 이름 : ",wordForAdd.getText().toString());
             }else{
                 wordMeanForAdd.setText(str);
+                Log.i("추가할 단어의 의미 : ",wordForRewrite.getText().toString());
             }
             isSecond = !isSecond;
             languagePickerWindow.setVisibility(View.INVISIBLE);
@@ -564,10 +585,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
         String mean_lang = wordMeanForRewrite.getText().toString();
         java.util.Date date = new java.util.Date(System.currentTimeMillis());
         vocabularyDB.updateVoca(id, voca_name, word_lang, mean_lang, date);
-        Log.i("update", "update");
-        Log.i("asddasasd",Integer.toString(reId));
-        Log.i("ididididid : ",Integer.toString(id));
-        Log.i("롱클릭 시 id", Integer.toString(vocaId));
+        Log.i("단어장 수정","");
 
     }
 
@@ -603,6 +621,7 @@ public class MyVocabularyActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
             }
+            Log.i("뒤로 가기 버튼 클릭","");
             return true;
         } else {
             return super.onKeyDown(keyCode, event);

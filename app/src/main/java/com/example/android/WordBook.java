@@ -14,8 +14,8 @@ public class WordBook {
     public Timestamp createDate;
     public String languageRelation;
     private long userId;
-    public LinkedList<String> word;
-    public LinkedList<String> mean;
+    public LinkedList<String> word; // 단어장의 단어 배열
+    public LinkedList<String> mean; // 단어장의 의미 배열
     public LinkedList<Boolean> isChecked;
     public LinkedList<View> wordView;
     public int rewriteId;

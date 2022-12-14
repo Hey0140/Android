@@ -68,13 +68,14 @@ public class MywordQuizActivity extends AppCompatActivity implements View.OnClic
         wordList = intent.getStringArrayListExtra("wordList");
         meanList = intent.getStringArrayListExtra("meanList");
         isWordQuiz = intent.getBooleanExtra("isWordQuiz",false);
+        Log.i("퀴즈로 나올 단어의 개수 : ",Integer.toString(size));
         if(wordList.size()== 0){
             Toast toast = new Toast(MywordQuizActivity.this);
             toast.makeText(MywordQuizActivity.this,
                     "퀴즈로 낼 수 있는 단어가 없습니다..", Toast.LENGTH_LONG).show();
+            Log.i("size == 0","액티비티 종료");
             finish();
         }
-        Log.d("size : ", Integer.toString(size));
         next_quiz = findViewById(R.id.next_quiz);
         quiz_text2 = findViewById(R.id.quiz_co_answer);
         quiz_text_box2 = findViewById(R.id.quiz_co_answer_box);
@@ -100,14 +101,10 @@ public class MywordQuizActivity extends AppCompatActivity implements View.OnClic
         }
         Collections.shuffle(randomIndexList);
 
-        for(int i = 0;i<size;i++)
-        {
-            Log.i("word : ",wordList.get(randomIndexList.get(i)));
-            Log.i("word : ",meanList.get(randomIndexList.get(i)));
-        }
 //        quiz = getResources().getStringArray(R.array.quiz);
 //        answer = getResources().getStringArray(R.array.answer);
         if(!isWordQuiz){
+            Log.i("의미 퀴즈 버튼 클릭","");
             quiz_text.setText(wordList.get(randomIndexList.get(quizIndex)));
             quiz_text.setVisibility(View.VISIBLE);
             quiz_text_box.setVisibility(View.VISIBLE);
@@ -115,6 +112,7 @@ public class MywordQuizActivity extends AppCompatActivity implements View.OnClic
             quiz_text_box2.setVisibility(View.GONE);
             quizIndex++;
         }else{
+            Log.i("단어 퀴즈 버튼 클릭","");
             quiz_text.setText(meanList.get(randomIndexList.get(quizIndex)));
             quiz_text.setVisibility(View.VISIBLE);
             quiz_text_box.setVisibility(View.VISIBLE);

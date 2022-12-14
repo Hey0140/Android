@@ -108,16 +108,17 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
         });
         wordList = new ArrayList<>(); // 신경X
         meanList = new ArrayList<>();
-        Log.d("wordID : ", Integer.toString(wordId));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backButton:
+                Log.i("뒤로 가기 버튼 클릭","");
                 finish();
                 break;
             case R.id.addButton:
+                Log.i("단어 추가 버튼 클릭","");
                 addWordWindow.bringToFront();
                 quizButton.setVisibility(View.GONE);
                 addWordWindow.setVisibility(View.VISIBLE);
@@ -130,13 +131,12 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.acceptButtonForAddWord:
+
                 backgroundView.setBackgroundColor(Color.parseColor("#00000000"));
                 String str1 = wordNameForAdd.getText().toString();
                 String str2 = wordMeanForAdd.getText().toString();
-                Log.d("asdasd", str1);
-                Log.d("asdasd", str2);
+                Log.i("단어 생성 : ",str1);
                 initWord(str1, str2);
-                Log.d("hello", "123123");
                 addWordWindow.setVisibility(View.GONE);
                 quizButton.setVisibility(View.VISIBLE);
                 wordMeanForAdd.setText("");
@@ -149,13 +149,16 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.uploadButton:
+                Log.i("업로드 버튼 클릭","");
                 break;
             case R.id.acceptButtonForDeleteWord:
+                Log.i("단어 삭제 버튼 클릭","");
                 deleteWord(idForRewrite);
                 rewriteWordWindow.setVisibility(View.GONE);
                 quizButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.acceptButtonForRewriteWord:
+                Log.i("단어 수정 버튼 클릭","");
                 rewriteWord(idForRewrite);
                 wordNameForRewrite.setText("");
                 wordMeanForRewrite.setText("");
@@ -163,6 +166,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 quizButton.setVisibility(View.VISIBLE);
                 break;
             case R.id.quizButton:
+                Log.i("퀴즈 버튼 클릭","");
                 //startActivity(new Intent(WordBookActivity.this,MywordQuizActivity.class));
                 quizSelectWindow.setVisibility(View.VISIBLE);
                 quizButton.setVisibility(View.GONE);
@@ -176,6 +180,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.wordQuiz:
+                Log.i("단어 이름으로 퀴즈 버튼 클릭","");
                 isWordQuiz = true;
                 int idx = wordId / 5 - 1;
                 Intent intent = new Intent(WordBookActivity.this, MywordQuizActivity.class);
@@ -205,6 +210,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.meanQuiz:
+                Log.i("단어 의미로 퀴즈 버튼 클릭","");
                 int idx2 = wordId / 5 - 1;
                 ArrayList<String> wordList = new ArrayList<>(); // 신경X
                 ArrayList<String> meanList = new ArrayList<>(); // 신경X
@@ -217,6 +223,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                     if (temp.isChecked()) {
                         wordList.add(tempWord.getText().toString());
                         meanList.add(tempMean.getText().toString());
+                        Log.i("단어 체크됨 : ",tempWord.getText().toString());
                     }
                 }
 
@@ -225,6 +232,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 intent2.putExtra("size", wordList.size());
                 intent2.putExtra("isWordQuiz", isWordQuiz);
                 quizSelectWindow.setVisibility(View.GONE);
+                Log.i("단어 배열 전달,퀴즈 액티비티로 전환","");
                 startActivity(intent2);
                 backgroundView.setBackgroundColor(Color.parseColor("#00000000"));
                 backgroundView.setOnTouchListener(new View.OnTouchListener() {
@@ -254,7 +262,6 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 rewriteWordWindow.setVisibility(View.VISIBLE);
                 quizButton.setVisibility(View.GONE);
                 idForRewrite = v.getId();
-                Log.d("idForRewrite : ", Integer.toString(idForRewrite));
                 return true;
             }
         });
@@ -267,7 +274,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
         tempMean.setText(wordMean);
         CheckBox tempBox = myWordListItemContainer.findViewById(R.id.checkBox);
         tempBox.setId(wordId * 1000 + myVocaArrayList.get(idx).word.size() * 5 + 3); // 체크 박스 id
-        Log.d("checkBox id : ", Integer.toString(tempBox.getId()));
+        Log.i("단어 생성 : ",word);
 
     }
 
@@ -283,7 +290,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
         myVocaArrayList.get(index).mean.set(arrIndex, temp2);
         tempWord.setText(temp1);
         tempMean.setText(temp2);
-
+        Log.i("단어 수정 : ", tempWord.getText().toString() + "으로 변경");
     }
 
     public void deleteWord(int reId)
@@ -299,8 +306,6 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
 
         View delView = (View) findViewById(reId);
         myWordListItemContainer.removeView((View) delView.getParent());
-        Log.d("reId : ", Integer.toString(reId));
-        Log.d("arrIndex : ", Integer.toString(arrIndex));
         for (int i = reId + 5; i <= lastId; i += 5) {
             // i == 5010 |
             View one = myWordListItemContainer.findViewById(i);
@@ -316,6 +321,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
             TextView four = myWordListItemContainer.findViewById(i + 3);
             four.setId(i - 2);
         }
+        Log.i("단어 삭제","");
 
     }
 
@@ -344,6 +350,7 @@ public class WordBookActivity extends AppCompatActivity implements View.OnClickL
                 });
 
             }
+            Log.i("뒤로 가기 버튼 클릭","");
             return true;
         }
         else{
